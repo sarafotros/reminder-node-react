@@ -1,5 +1,4 @@
-const fs = require('fs');
-
+const fs = require("fs");
 
 const addNote = (myNotes) => {
   const allNotes = loadNotes();
@@ -9,9 +8,9 @@ const addNote = (myNotes) => {
 
 const loadNotes = () => {
   try {
-    const dataBuffer = fs.readFileSync('notes.json'); //* reading from notes.json file
-    const notesJson = dataBuffer.toString();
-    return JSON.parse(notesJson);
+    const dataBuffer = fs.readFileSync("notes.json");
+    const dataJson = dataBuffer.toString();
+    return JSON.parse(dataJson);
   } catch (error) {
     return [];
   }
@@ -19,13 +18,13 @@ const loadNotes = () => {
 
 const saveNotes = (allNotes) => {
   const notesJson = JSON.stringify(allNotes);
-  fs.writeFileSync('notes.json', notesJson);
+  fs.writeFileSync("notes.json", notesJson);
 };
 
 const listNotes = () => {
   const allNotes = loadNotes();
   allNotes.map((note) => {
-    console.log(note);
+    console.log(note.reminder);
   });
 };
 
@@ -37,10 +36,9 @@ const removeNote = (noteToDelete) => {
   saveNotes(notesToKeep);
 };
 
-
 module.exports = {
   addNote,
   listNotes,
   removeNote,
-  loadNotes
+  loadNotes,
 };
