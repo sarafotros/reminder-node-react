@@ -16,10 +16,14 @@ app.get('/listall', (req, res)=>{
     res.status(200).send({notes: allNotes})
 })
 
-app.post('/add', ( req, res)=>{
-    console.log(req.body.reminder);
-    res.status(200).send({message:'successfully added'})
-})
+app.post("/add", (req, res) => {
+    try {
+      addNote(req.body.reminder);
+      res.status(200).send({ message: "Successfully added a note" });
+    } catch (error) {
+      res.status(500).send({ message: error });
+    }
+  });
 
 app.listen(3005, ()=>{
 console.log('listening to port 3005');    
